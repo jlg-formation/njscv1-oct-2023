@@ -33,14 +33,14 @@ app.delete("/articles/:id", (req, res) => {
   const id = req.params.id;
   console.log("id: ", id);
 
-  const article = articles.find((a) => a.id === id);
-  if (article === undefined) {
+  const index = articles.findIndex((a) => a.id === id);
+  if (index === -1) {
     // article pas trouve
     res.status(404).end();
     return;
   }
   // article trouve
-  articles = articles.filter((a) => a.id !== id);
+  articles.splice(index, 1);
   res.status(204).end();
 });
 
