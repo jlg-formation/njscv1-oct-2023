@@ -6,6 +6,10 @@ const app = express();
 const port = 3000;
 const publicDir = ".";
 
+const generateId = () => {
+  return Date.now() + "_" + (Math.random() * 1e9).toFixed(0);
+};
+
 const articles = [];
 
 app.use((req, res, next) => {
@@ -28,7 +32,9 @@ app.post("/api/articles", (req, res) => {
   // avec un body contenant l'id cree. au format json
 
   const body = req.body;
-  console.log("body: ", body);
+  const article = { ...body, id: generateId() };
+  console.log("article: ", article);
+
   res.send("okay");
 });
 
