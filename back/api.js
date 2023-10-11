@@ -6,7 +6,17 @@ const app = express.Router();
 let articles = [];
 
 app.get("/articles", (req, res) => {
-  res.json(articles);
+  const query = req.query;
+  console.log("query: ", query);
+  const filteredArticles = articles.filter((a) => {
+    if (query.name !== undefined) {
+      if (a.name !== query.name) {
+        return false;
+      }
+    }
+    return true;
+  });
+  res.json(filteredArticles);
 });
 
 app.get("/articles/:id", (req, res) => {
