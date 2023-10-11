@@ -1,14 +1,11 @@
 console.log("About to start a server...");
 const express = require("express");
 const serveIndex = require("serve-index");
+const { randomUUID } = require("node:crypto");
 
 const app = express();
 const port = 3000;
 const publicDir = ".";
-
-const generateId = () => {
-  return Date.now() + "_" + (Math.random() * 1e9).toFixed(0);
-};
 
 const articles = [];
 
@@ -31,8 +28,7 @@ app.post("/api/articles", (req, res) => {
   // on envoie une reponse 201 (created)
   // avec un body contenant l'id cree. au format json
 
-  const body = req.body;
-  const article = { ...body, id: generateId() };
+  const article = { ...req.body, id: randomUUID() };
   console.log("article: ", article);
 
   res.send("okay");
