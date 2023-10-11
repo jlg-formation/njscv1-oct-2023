@@ -3,13 +3,21 @@ const { randomUUID } = require("node:crypto");
 
 const app = express.Router();
 
-let articles = [];
+let articles = [{ id: "a1", name: "Pelle" }];
 
 app.get("/articles", (req, res) => {
   const query = req.query;
   console.log("query: ", query);
   const filteredArticles = articles.filter((a) => {
     if (query.name !== undefined) {
+      if (query.name.startsWith("/") && query.name.endsWith("/")) {
+        const regex = query.name.substring(1, query.name.length - 2);
+        const match = a.name.match(new RegExp(regex));
+        if (!match) {
+          return false;
+        }
+        return true;
+      }
       if (a.name !== query.name) {
         return false;
       }
