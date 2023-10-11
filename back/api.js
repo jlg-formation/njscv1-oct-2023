@@ -9,6 +9,21 @@ app.get("/articles", (req, res) => {
   res.json(articles);
 });
 
+app.get("/articles/:id", (req, res) => {
+  // on retrouve l'id
+  // on cherche l'article dans la liste des articles
+  // -> pas trouve on fait une reponse 404 not found sans body
+  // -> trouve on renvoie une reponse 200 ok avec body = article
+
+  const id = req.params.id;
+  const article = articles.find((a) => a.id === id);
+  if (article === undefined) {
+    res.status(404).end("404 not found");
+    return;
+  }
+  res.json(article);
+});
+
 app.post("/articles", (req, res) => {
   // retrouver le body
   // le contenu du body est l'article a ajouter
@@ -36,7 +51,7 @@ app.delete("/articles/:id", (req, res) => {
   const index = articles.findIndex((a) => a.id === id);
   if (index === -1) {
     // article pas trouve
-    res.status(404).end();
+    res.status(404).end("404 not found");
     return;
   }
   // article trouve
