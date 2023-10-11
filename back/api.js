@@ -44,4 +44,17 @@ app.delete("/articles/:id", (req, res) => {
   res.status(204).end();
 });
 
+app.delete("/articles", (req, res) => {
+  // retrouver la liste des ids (body)
+  // retrouve les articles dans le tableau articles avec leur id
+  // nettoyer le tableau d'article en enlevant tous
+  // les articles dont l'id est dans la liste des ids
+  // et on renvoie une reponse 204 no content sans body
+
+  const ids = req.body;
+  console.log("ids: ", ids);
+  articles = articles.filter((a) => !ids.includes(a.id));
+  res.status(204).end();
+});
+
 module.exports = app;
