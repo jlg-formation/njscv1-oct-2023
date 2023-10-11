@@ -1,6 +1,14 @@
 const express = require("express");
 const { randomUUID } = require("node:crypto");
 
+const isMatchingName = (name, queryName) => {
+  if (queryName.startsWith("/") && queryName.endsWith("/")) {
+    const regex = queryName.substring(1, queryName.length - 1);
+    return name.match(new RegExp(regex));
+  }
+  return name === queryName;
+};
+
 const app = express.Router();
 
 let articles = [{ id: "a1", name: "Pelle" }];
@@ -10,17 +18,7 @@ app.get("/articles", (req, res) => {
   console.log("query: ", query);
   const filteredArticles = articles.filter((a) => {
     if (query.name !== undefined) {
-      if (query.name.startsWith("/") && query.name.endsWith("/")) {
-        const regex = query.name.substring(1, query.name.length - 2);
-        const match = a.name.match(new RegExp(regex));
-        if (!match) {
-          return false;
-        }
-        return true;
-      }
-      if (a.name !== query.name) {
-        return false;
-      }
+      return isMatchingName(a.name, query.name);
     }
     return true;
   });
