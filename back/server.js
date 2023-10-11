@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.get("/api/articles", (req, res) => {
-  res.json([{ name: "Tournevis", price: 2.99, qty: 120 }]);
+  res.json(articles);
 });
 
 app.post("/api/articles", (req, res) => {
@@ -30,8 +30,8 @@ app.post("/api/articles", (req, res) => {
 
   const article = { ...req.body, id: randomUUID() };
   console.log("article: ", article);
-
-  res.send("okay");
+  articles.push(article);
+  res.status(201).json({ id: article.id });
 });
 
 app.use(express.static(publicDir));
