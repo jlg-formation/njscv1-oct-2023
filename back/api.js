@@ -1,20 +1,15 @@
 const express = require("express");
 const { randomUUID } = require("node:crypto");
-const { isMatchingName } = require("./misc");
+const { RAMArticleService } = require("./services/RAMArticleService");
 
 const app = express.Router();
 
-let articles = [{ id: "a1", name: "Pelle" }];
+const articleService = new RAMArticleService();
 
 app.get("/articles", (req, res) => {
   const query = req.query;
   console.log("query: ", query);
-  const filteredArticles = articles.filter((a) => {
-    if (query.name !== undefined) {
-      return isMatchingName(a.name, query.name);
-    }
-    return true;
-  });
+  const filteredArticles = articleService.retrieveAll(query);
   res.json(filteredArticles);
 });
 
@@ -25,7 +20,7 @@ app.get("/articles/:id", (req, res) => {
   // -> trouve on renvoie une reponse 200 ok avec body = article
 
   const id = req.params.id;
-  const article = articles.find((a) => a.id === id);
+  const article = articleService.articles.find((a) => a.id === id);
   if (article === undefined) {
     res.status(404).end("404 not found");
     return;
@@ -43,7 +38,7 @@ app.post("/articles", (req, res) => {
 
   const article = { ...req.body, id: randomUUID() };
   console.log("article: ", article);
-  articles.push(article);
+  articleService.articles.push(article);
   res.status(201).json({ id: article.id });
 });
 
@@ -57,14 +52,14 @@ app.delete("/articles/:id", (req, res) => {
   const id = req.params.id;
   console.log("id: ", id);
 
-  const index = articles.findIndex((a) => a.id === id);
+  const index = articleService.articles.findIndex((a) => a.id === id);
   if (index === -1) {
     // article pas trouve
     res.status(404).end("404 not found");
     return;
   }
   // article trouve
-  articles.splice(index, 1);
+  articleService.articles.splice(index, 1);
   res.status(204).end();
 });
 
@@ -77,7 +72,9 @@ app.delete("/articles", (req, res) => {
 
   const ids = req.body;
   console.log("ids: ", ids);
-  articles = articles.filter((a) => !ids.includes(a.id));
+  articleService.articles = articleService.articles.filter(
+    (a) => !ids.includes(a.id)
+  );
   res.status(204).end();
 });
 
