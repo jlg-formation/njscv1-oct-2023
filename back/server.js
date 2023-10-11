@@ -6,9 +6,30 @@ const app = express();
 const port = 3000;
 const publicDir = ".";
 
+const articles = [];
+
 app.use((req, res, next) => {
   console.log("req: ", req.method, req.url);
   next();
+});
+
+app.use(express.json());
+
+app.get("/api/articles", (req, res) => {
+  res.json([{ name: "Tournevis", price: 2.99, qty: 120 }]);
+});
+
+app.post("/api/articles", (req, res) => {
+  // retrouver le body
+  // le contenu du body est l'article a ajouter
+  // creer un id unique
+  // on push l'article dans le tableau
+  // on envoie une reponse 201 (created)
+  // avec un body contenant l'id cree. au format json
+
+  const body = req.body;
+  console.log("body: ", body);
+  res.send("okay");
 });
 
 app.use(express.static(publicDir));
