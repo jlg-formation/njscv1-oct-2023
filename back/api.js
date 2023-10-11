@@ -23,4 +23,16 @@ app.post("/articles", (req, res) => {
   res.status(201).json({ id: article.id });
 });
 
+app.delete("/articles/:id", (req, res) => {
+  // retrouve l'article dans le tableau articles avec son id
+  // deux cas : on a retrouve l'article ou pas
+  // pas trouve -> on genere une reponse 404 not found
+  // trouve -> on supprime l'article du tableau avec son id
+  // et on renvoie une reponse 204 no content sans body
+
+  const id = req.params.id;
+  console.log("id: ", id);
+  res.send("ok");
+});
+
 module.exports = app;
