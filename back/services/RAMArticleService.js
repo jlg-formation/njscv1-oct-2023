@@ -1,7 +1,7 @@
 const { isMatchingName } = require("../misc");
 
 class RAMArticleService {
-  articles = [{ id: "a1", name: "Pelle" }];
+  articles = [];
 
   constructor() {}
 
