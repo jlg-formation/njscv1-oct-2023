@@ -3,7 +3,7 @@ const { randomUUID } = require("node:crypto");
 
 const app = express.Router();
 
-const articles = [];
+let articles = [];
 
 app.get("/articles", (req, res) => {
   res.json(articles);
@@ -32,7 +32,16 @@ app.delete("/articles/:id", (req, res) => {
 
   const id = req.params.id;
   console.log("id: ", id);
-  res.send("ok");
+
+  const article = articles.find((a) => a.id === id);
+  if (article === undefined) {
+    // article pas trouve
+    res.status(404).end();
+    return;
+  }
+  // article trouve
+  articles = articles.filter((a) => a.id !== id);
+  res.status(204).end();
 });
 
 module.exports = app;
