@@ -20,6 +20,10 @@ class FileArticleService {
     }
   }
 
+  save() {
+    fs.writeFileSync(FILENAME, JSON.stringify(this.articles, undefined, 2));
+  }
+
   retrieveAll(query) {
     const filteredArticles = this.articles.filter((a) => {
       if (query.name !== undefined) {
@@ -38,6 +42,7 @@ class FileArticleService {
     const article = { ...newArticle, id: randomUUID() };
     console.log("article: ", article);
     this.articles.push(article);
+    this.save();
     return article.id;
   }
 
@@ -48,10 +53,12 @@ class FileArticleService {
     }
     // article trouve
     this.articles.splice(index, 1);
+    this.save();
   }
 
   deleteMany(ids) {
     this.articles = this.articles.filter((a) => !ids.includes(a.id));
+    this.save();
   }
 }
 
