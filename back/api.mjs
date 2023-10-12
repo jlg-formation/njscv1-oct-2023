@@ -1,10 +1,10 @@
-const express = require("express");
-const { RAMArticleService } = require("./services/RAMArticleService");
-const { FileArticleService } = require("./services/FileArticleService");
-const { MongoDBArticleService } = require("./services/MongoDBArticleService");
+import { Router } from "express";
+import { RAMArticleService } from "./services/RAMArticleService.js";
+import { FileArticleService } from "./services/FileArticleService.js";
+import { MongoDBArticleService } from "./services/MongoDBArticleService.js";
 
-module.exports = (type) => {
-  const app = express.Router();
+const api = (type) => {
+  const app = Router();
 
   let articleService;
   switch (type) {
@@ -123,3 +123,5 @@ module.exports = (type) => {
 
   return app;
 };
+
+export default api;
