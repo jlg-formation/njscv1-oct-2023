@@ -1,21 +1,25 @@
 const express = require("express");
 const { RAMArticleService } = require("./services/RAMArticleService");
 const { FileArticleService } = require("./services/FileArticleService");
+const { MongoDBArticleService } = require("./services/MongoDBArticleService");
 
 module.exports = (type) => {
   const app = express.Router();
 
   let articleService;
-  if (type === "ram") {
-    articleService = new RAMArticleService();
+  switch (type) {
+    case "ram":
+      articleService = new RAMArticleService();
+      break;
+    case "file":
+      articleService = new FileArticleService();
+      break;
+    case "mongodb":
+      articleService = new MongoDBArticleService();
+      break;
+    default:
+      throw new Error(`Cannot start api middleware. Bad type: ${type}`);
   }
-  if (type === "file") {
-    articleService = new FileArticleService();
-  }
-
-  // const articleService = new FileArticleService();
-  // const articleService = new MongoDBArticleService();
-  // const articleService = new MySQLArticleService();
 
   app.get("/articles", (req, res) => {
     const query = req.query;

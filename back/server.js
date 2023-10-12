@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use("/api", api("file"));
+app.use("/api", api("mongodb"));
 
 app.use(express.static(publicDir));
 app.use(serveIndex(publicDir, { icons: true }));
