@@ -2,7 +2,7 @@ console.log("About to start a server...");
 import express from "express";
 import serveIndex from "serve-index";
 
-import api from "./api.mjs";
+import api from "./api.js";
 
 const app = express();
 const port = 3000;

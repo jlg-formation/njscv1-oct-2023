@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from "mongodb";
-import { handleId } from "../misc.mjs";
+import { handleId } from "../misc.js";
 
 // Replace the uri string with your connection string.
 const uri = "mongodb://127.0.0.1:27017";
