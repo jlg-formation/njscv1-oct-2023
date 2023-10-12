@@ -11,22 +11,16 @@ class MongoDBArticleService {
   constructor() {}
 
   async retrieveAll(query) {
-    console.log("start retrieveAll");
     try {
       const documents = await articles.find().toArray();
-      console.log("documents: ", documents);
 
       return documents.map((doc) => handleId(doc));
-    } catch (err) {
-      console.log("err: ", err);
-    }
+    } catch (err) {}
   }
 
   async retrieveOne(id) {
     const doc = await articles.findOne({ _id: new ObjectId(id) });
-    console.log("doc: ", doc);
     const article = handleId(doc);
-    console.log("article: ", article);
     return article;
   }
 
@@ -36,7 +30,7 @@ class MongoDBArticleService {
   }
 
   async deleteOne(id) {
-    throw new Error("Method not implemented");
+    await articles.deleteOne({ _id: new ObjectId(id) });
   }
 
   async deleteMany(ids) {

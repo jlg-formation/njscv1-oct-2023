@@ -25,7 +25,6 @@ module.exports = (type) => {
     (async () => {
       try {
         const query = req.query;
-        console.log("query: ", query);
         const filteredArticles = await articleService.retrieveAll(query);
         res.json(filteredArticles);
       } catch (err) {
@@ -86,7 +85,6 @@ module.exports = (type) => {
         // et on renvoie une reponse 204 no content sans body
 
         const id = req.params.id;
-        console.log("id: ", id);
 
         const article = articleService.retrieveOne(id);
         if (article === undefined) {
@@ -114,7 +112,6 @@ module.exports = (type) => {
         // et on renvoie une reponse 204 no content sans body
 
         const ids = req.body;
-        console.log("ids: ", ids);
         await articleService.deleteMany(ids);
         res.status(204).end();
       } catch (err) {
