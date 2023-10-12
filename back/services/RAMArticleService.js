@@ -26,6 +26,15 @@ class RAMArticleService {
     this.articles.push(article);
     return article.id;
   }
+
+  deleteOne(id) {
+    const index = this.articles.findIndex((a) => a.id === id);
+    if (index === -1) {
+      return;
+    }
+    // article trouve
+    this.articles.splice(index, 1);
+  }
 }
 
 module.exports = { RAMArticleService };

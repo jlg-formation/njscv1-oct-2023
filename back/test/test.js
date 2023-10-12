@@ -39,4 +39,15 @@ describe("Articles", function () {
     delete expectedA1.id;
     assert.deepStrictEqual(expectedA1, a1);
   });
+
+  it("delete one article", async () => {
+    let response = await axios.get(url);
+    const id = response.data[0].id;
+    const articleNbr = response.data.length;
+    response = await axios.delete(`${url}/${id}`);
+    assert.deepStrictEqual(response.status, 204);
+    response = await axios.get(url);
+    const newArticleNbr = response.data.length;
+    assert.deepStrictEqual(newArticleNbr, articleNbr - 1);
+  });
 });

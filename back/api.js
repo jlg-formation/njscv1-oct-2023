@@ -52,14 +52,14 @@ app.delete("/articles/:id", (req, res) => {
   const id = req.params.id;
   console.log("id: ", id);
 
-  const index = articleService.articles.findIndex((a) => a.id === id);
-  if (index === -1) {
+  const article = articleService.retrieveOne(id);
+  if (article === undefined) {
     // article pas trouve
     res.status(404).end("404 not found");
     return;
   }
   // article trouve
-  articleService.articles.splice(index, 1);
+  articleService.deleteOne(id);
   res.status(204).end();
 });
 
