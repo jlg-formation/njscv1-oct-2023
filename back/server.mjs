@@ -1,8 +1,8 @@
 console.log("About to start a server...");
-const express = require("express");
-const serveIndex = require("serve-index");
+import express from "express";
+import serveIndex from "serve-index";
 
-const api = require("./api");
+import api from "./api.js";
 
 const app = express();
 const port = 3000;
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use("/api", api("file"));
+app.use("/api", api("mongodb"));
 
 app.use(express.static(publicDir));
 app.use(serveIndex(publicDir, { icons: true }));
