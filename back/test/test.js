@@ -1,6 +1,6 @@
-const assert = require("assert");
-const axios = require("axios");
-const { a1 } = require("./data/articles");
+import assert from "assert";
+import axios from "axios";
+import { a1 } from "./data/articles.js";
 
 const url = "http://localhost:3000/api/articles";
 
