@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use("/api", api);
+app.use("/api", api("ram"));
 
 app.use(express.static(publicDir));
 app.use(serveIndex(publicDir, { icons: true }));
