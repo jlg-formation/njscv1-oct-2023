@@ -1,5 +1,6 @@
 const express = require("express");
 const { RAMArticleService } = require("./services/RAMArticleService");
+const { FileArticleService } = require("./services/FileArticleService");
 
 module.exports = (type) => {
   const app = express.Router();
@@ -8,6 +9,10 @@ module.exports = (type) => {
   if (type === "ram") {
     articleService = new RAMArticleService();
   }
+  if (type === "file") {
+    articleService = new FileArticleService();
+  }
+
   // const articleService = new FileArticleService();
   // const articleService = new MongoDBArticleService();
   // const articleService = new MySQLArticleService();
