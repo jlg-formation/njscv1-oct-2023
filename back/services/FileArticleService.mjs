@@ -1,22 +1,22 @@
-const { isMatchingName } = require("../misc");
-const { randomUUID } = require("node:crypto");
-const fs = require("node:fs");
-const path = require("node:path");
-const _ = require("lodash");
+import { isMatchingName } from "../misc.js";
+import { randomUUID } from "node:crypto";
+import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+import _ from "lodash";
 
 const FILENAME = "./data/articles.json";
 
-class FileArticleService {
+export class FileArticleService {
   #articles = [];
 
   constructor() {
     try {
       this.#articles = JSON.parse(
-        fs.readFileSync(FILENAME, { encoding: "utf-8" })
+        readFileSync(FILENAME, { encoding: "utf-8" })
       );
     } catch (err) {
-      fs.mkdirSync(path.dirname(FILENAME), { recursive: true });
-      fs.writeFileSync(FILENAME, JSON.stringify(this.#articles));
+      mkdirSync(dirname(FILENAME), { recursive: true });
+      writeFileSync(FILENAME, JSON.stringify(this.#articles));
       console.warn("articles.json recreated");
     }
   }
@@ -24,7 +24,7 @@ class FileArticleService {
   debounceSave = _.debounce(this.save.bind(this), 2000);
 
   save() {
-    fs.writeFileSync(FILENAME, JSON.stringify(this.#articles, undefined, 2));
+    writeFileSync(FILENAME, JSON.stringify(this.#articles, undefined, 2));
   }
 
   async retrieveAll(query) {
@@ -64,5 +64,3 @@ class FileArticleService {
     this.debounceSave();
   }
 }
-
-module.exports = { FileArticleService };

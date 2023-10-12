@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { RAMArticleService } from "./services/RAMArticleService.js";
-import { FileArticleService } from "./services/FileArticleService.js";
+import { FileArticleService } from "./services/FileArticleService.mjs";
 import { MongoDBArticleService } from "./services/MongoDBArticleService.js";
 
 const api = (type) => {
