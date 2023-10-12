@@ -63,4 +63,16 @@ describe("Articles", function () {
     const remainingIds = response.data.map((a) => a.id);
     assert.deepStrictEqual(remainingIds, [ids[2]]);
   });
+
+  it("should return 404 (bad id)", async () => {
+    let response = await axios.get(`${url}/qqq`, { validateStatus: false });
+    assert.deepStrictEqual(response.status, 404);
+  });
+
+  it("should return 404 (well formatted id)", async () => {
+    let response = await axios.get(`${url}/000000000000000000000001`, {
+      validateStatus: false,
+    });
+    assert.deepStrictEqual(response.status, 404);
+  });
 });

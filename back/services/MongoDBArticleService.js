@@ -19,7 +19,16 @@ export class MongoDBArticleService {
   }
 
   async retrieveOne(id) {
-    const doc = await articles.findOne({ _id: new ObjectId(id) });
+    let objectId;
+    try {
+      objectId = new ObjectId(id);
+    } catch (err) {
+      return undefined;
+    }
+    const doc = await articles.findOne({ _id: objectId });
+    if (doc === null) {
+      return undefined;
+    }
     const article = handleId(doc);
     return article;
   }
