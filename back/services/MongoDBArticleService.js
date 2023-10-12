@@ -1,4 +1,5 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
+const { handleId } = require("../misc");
 
 // Replace the uri string with your connection string.
 const uri = "mongodb://127.0.0.1:27017";
@@ -10,25 +11,33 @@ class MongoDBArticleService {
   constructor() {}
 
   async retrieveAll(query) {
-    const documents = await articles.find().toArray();
-    console.log("documents: ", documents);
-    return documents;
+    console.log("start retrieveAll");
+    try {
+      const documents = await articles.find().toArray();
+      console.log("documents: ", documents);
+
+      return documents.map((doc) => handleId(doc));
+    } catch (err) {
+      console.log("err: ", err);
+    }
   }
 
-  retrieveOne(id) {
+  async retrieveOne(id) {
     return undefined;
   }
 
-  add(newArticle) {
+  async add(newArticle) {
+    const doc = await articles.insertOne(newArticle);
+    return doc.insertedId.toString();
+  }
+
+  async deleteOne(id) {
     throw new Error("Method not implemented");
   }
 
-  deleteOne(id) {
-    throw new Error("Method not implemented");
-  }
-
-  deleteMany(ids) {
-    throw new Error("Method not implemented");
+  async deleteMany(ids) {
+    const docIds = ids.map((id) => new ObjectId(id));
+    await articles.deleteMany({ _id: { $in: docIds } });
   }
 }
 

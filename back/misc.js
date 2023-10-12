@@ -6,4 +6,11 @@ const isMatchingName = (name, queryName) => {
   return name === queryName;
 };
 
-module.exports = { isMatchingName };
+const handleId = (doc) => {
+  const newDoc = { ...doc };
+  newDoc.id = newDoc._id;
+  delete newDoc._id;
+  return newDoc;
+};
+
+module.exports = { isMatchingName, handleId };
