@@ -1,4 +1,5 @@
 const { isMatchingName } = require("../misc");
+const { randomUUID } = require("node:crypto");
 
 class RAMArticleService {
   articles = [];
@@ -17,6 +18,13 @@ class RAMArticleService {
 
   retrieveOne(id) {
     return this.articles.find((a) => a.id === id);
+  }
+
+  add(newArticle) {
+    const article = { ...newArticle, id: randomUUID() };
+    console.log("article: ", article);
+    this.articles.push(article);
+    return article.id;
   }
 }
 

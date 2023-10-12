@@ -1,5 +1,4 @@
 const express = require("express");
-const { randomUUID } = require("node:crypto");
 const { RAMArticleService } = require("./services/RAMArticleService");
 
 const app = express.Router();
@@ -39,10 +38,8 @@ app.post("/articles", (req, res) => {
   // on envoie une reponse 201 (created)
   // avec un body contenant l'id cree. au format json
 
-  const article = { ...req.body, id: randomUUID() };
-  console.log("article: ", article);
-  articleService.articles.push(article);
-  res.status(201).json({ id: article.id });
+  const id = articleService.add(req.body);
+  res.status(201).json({ id });
 });
 
 app.delete("/articles/:id", (req, res) => {
