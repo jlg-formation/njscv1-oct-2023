@@ -23,7 +23,11 @@ class MongoDBArticleService {
   }
 
   async retrieveOne(id) {
-    return undefined;
+    const doc = await articles.findOne({ _id: new ObjectId(id) });
+    console.log("doc: ", doc);
+    const article = handleId(doc);
+    console.log("article: ", article);
+    return article;
   }
 
   async add(newArticle) {

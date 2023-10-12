@@ -8,7 +8,7 @@ const isMatchingName = (name, queryName) => {
 
 const handleId = (doc) => {
   const newDoc = { ...doc };
-  newDoc.id = newDoc._id;
+  newDoc.id = newDoc._id.toString();
   delete newDoc._id;
   return newDoc;
 };
