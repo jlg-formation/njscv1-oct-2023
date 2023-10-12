@@ -14,6 +14,10 @@ class RAMArticleService {
     });
     return filteredArticles;
   }
+
+  retrieveOne(id) {
+    return this.articles.find((a) => a.id === id);
+  }
 }
 
 module.exports = { RAMArticleService };

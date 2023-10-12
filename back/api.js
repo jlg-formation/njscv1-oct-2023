@@ -5,6 +5,9 @@ const { RAMArticleService } = require("./services/RAMArticleService");
 const app = express.Router();
 
 const articleService = new RAMArticleService();
+// const articleService = new FileArticleService();
+// const articleService = new MongoDBArticleService();
+// const articleService = new MySQLArticleService();
 
 app.get("/articles", (req, res) => {
   const query = req.query;
@@ -20,7 +23,7 @@ app.get("/articles/:id", (req, res) => {
   // -> trouve on renvoie une reponse 200 ok avec body = article
 
   const id = req.params.id;
-  const article = articleService.articles.find((a) => a.id === id);
+  const article = articleService.retrieveOne(id);
   if (article === undefined) {
     res.status(404).end("404 not found");
     return;
