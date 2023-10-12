@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { RAMArticleService } from "./services/RAMArticleService.js";
+import { RAMArticleService } from "./services/RAMArticleService.mjs";
 import { FileArticleService } from "./services/FileArticleService.mjs";
 import { MongoDBArticleService } from "./services/MongoDBArticleService.js";
 

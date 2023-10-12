@@ -1,7 +1,7 @@
-const { isMatchingName } = require("../misc");
-const { randomUUID } = require("node:crypto");
+import { isMatchingName } from "../misc.js";
+import { randomUUID } from "node:crypto";
 
-class RAMArticleService {
+export class RAMArticleService {
   articles = [];
 
   constructor() {}
@@ -40,5 +40,3 @@ class RAMArticleService {
     this.articles = this.articles.filter((a) => !ids.includes(a.id));
   }
 }
-
-module.exports = { RAMArticleService };
