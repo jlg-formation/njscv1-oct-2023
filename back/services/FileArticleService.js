@@ -1,10 +1,24 @@
 const { isMatchingName } = require("../misc");
 const { randomUUID } = require("node:crypto");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const FILENAME = "./data/articles.json";
 
 class FileArticleService {
   articles = [];
 
-  constructor() {}
+  constructor() {
+    try {
+      this.articles = JSON.parse(
+        fs.readFileSync(FILENAME, { encoding: "utf-8" })
+      );
+    } catch (err) {
+      fs.mkdirSync(path.dirname(FILENAME), { recursive: true });
+      fs.writeFileSync(FILENAME, JSON.stringify(this.articles));
+      console.warn("articles.json recreated");
+    }
+  }
 
   retrieveAll(query) {
     const filteredArticles = this.articles.filter((a) => {
