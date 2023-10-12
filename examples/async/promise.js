@@ -1,18 +1,5 @@
 const fs = require("node:fs");
-
-const promisify =
-  (asyncFn) =>
-  (...args) => {
-    return new Promise((resolve, reject) => {
-      asyncFn(...args, (err, result) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(result);
-      });
-    });
-  };
+const { promisify } = require("node:util");
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
