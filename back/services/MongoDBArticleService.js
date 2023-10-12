@@ -1,67 +1,34 @@
-const { isMatchingName } = require("../misc");
-const { randomUUID } = require("node:crypto");
-const fs = require("node:fs");
-const path = require("node:path");
-const _ = require("lodash");
+const { MongoClient } = require("mongodb");
 
-const FILENAME = "./data/articles.json";
+// Replace the uri string with your connection string.
+const uri = "mongodb://127.0.0.1:27017";
+const client = new MongoClient(uri);
+const database = client.db("gestion-stock");
+const articles = database.collection("articles");
 
 class MongoDBArticleService {
-  articles = [];
+  constructor() {}
 
-  constructor() {
-    try {
-      this.articles = JSON.parse(
-        fs.readFileSync(FILENAME, { encoding: "utf-8" })
-      );
-    } catch (err) {
-      fs.mkdirSync(path.dirname(FILENAME), { recursive: true });
-      fs.writeFileSync(FILENAME, JSON.stringify(this.articles));
-      console.warn("articles.json recreated");
-    }
-  }
-
-  debounceSave = _.debounce(this.save.bind(this), 2000);
-
-  save() {
-    fs.writeFileSync(FILENAME, JSON.stringify(this.articles, undefined, 2));
-  }
-
-  retrieveAll(query) {
-    const filteredArticles = this.articles.filter((a) => {
-      if (query.name !== undefined) {
-        return isMatchingName(a.name, query.name);
-      }
-      return true;
-    });
-    return filteredArticles;
+  async retrieveAll(query) {
+    const documents = await articles.find().toArray();
+    console.log("documents: ", documents);
+    return documents;
   }
 
   retrieveOne(id) {
-    return this.articles.find((a) => a.id === id);
+    return undefined;
   }
 
   add(newArticle) {
-    const article = { ...newArticle, id: randomUUID() };
-    console.log("article: ", article);
-    this.articles.push(article);
-    this.debounceSave();
-    return article.id;
+    throw new Error("Method not implemented");
   }
 
   deleteOne(id) {
-    const index = this.articles.findIndex((a) => a.id === id);
-    if (index === -1) {
-      return;
-    }
-    // article trouve
-    this.articles.splice(index, 1);
-    this.debounceSave();
+    throw new Error("Method not implemented");
   }
 
   deleteMany(ids) {
-    this.articles = this.articles.filter((a) => !ids.includes(a.id));
-    this.debounceSave();
+    throw new Error("Method not implemented");
   }
 }
 
