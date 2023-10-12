@@ -1,7 +1,10 @@
 const { MongoClient } = require("mongodb");
+
 // Replace the uri string with your connection string.
-const uri = "mongodb://127.0.0.1:27017";
+const uri = "mongodb://localhost:27017";
+
 const client = new MongoClient(uri);
+
 async function run() {
   try {
     const database = client.db("gestion-stock");
@@ -15,4 +18,5 @@ async function run() {
     await client.close();
   }
 }
+
 run().catch(console.dir);
