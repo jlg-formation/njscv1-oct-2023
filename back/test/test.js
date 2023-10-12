@@ -50,4 +50,17 @@ describe("Articles", function () {
     const newArticleNbr = response.data.length;
     assert.deepStrictEqual(newArticleNbr, articleNbr - 1);
   });
+
+  it("should delete many articles", async () => {
+    await axios.post(url, a1);
+    await axios.post(url, a1);
+    await axios.post(url, a1);
+    let response = await axios.get(url);
+    const ids = response.data.map((a) => a.id);
+    const toRemoveIds = ids.slice(0, 2);
+    await axios.delete(url, { data: toRemoveIds });
+    response = await axios.get(url);
+    const remainingIds = response.data.map((a) => a.id);
+    assert.deepStrictEqual(remainingIds, [ids[2]]);
+  });
 });

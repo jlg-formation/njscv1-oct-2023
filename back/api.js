@@ -72,9 +72,7 @@ app.delete("/articles", (req, res) => {
 
   const ids = req.body;
   console.log("ids: ", ids);
-  articleService.articles = articleService.articles.filter(
-    (a) => !ids.includes(a.id)
-  );
+  articleService.deleteMany(ids);
   res.status(204).end();
 });
 

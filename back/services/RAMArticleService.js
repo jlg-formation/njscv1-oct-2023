@@ -35,6 +35,10 @@ class RAMArticleService {
     // article trouve
     this.articles.splice(index, 1);
   }
+
+  deleteMany(ids) {
+    this.articles = this.articles.filter((a) => !ids.includes(a.id));
+  }
 }
 
 module.exports = { RAMArticleService };
