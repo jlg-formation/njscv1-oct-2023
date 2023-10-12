@@ -1,5 +1,5 @@
-const { MongoClient, ObjectId } = require("mongodb");
-const { handleId } = require("../misc");
+import { MongoClient, ObjectId } from "mongodb";
+import { handleId } from "../misc.js";
 
 // Replace the uri string with your connection string.
 const uri = "mongodb://127.0.0.1:27017";
@@ -7,7 +7,7 @@ const client = new MongoClient(uri);
 const database = client.db("gestion-stock");
 const articles = database.collection("articles");
 
-class MongoDBArticleService {
+export class MongoDBArticleService {
   constructor() {}
 
   async retrieveAll(query) {
@@ -38,5 +38,3 @@ class MongoDBArticleService {
     await articles.deleteMany({ _id: { $in: docIds } });
   }
 }
-
-module.exports = { MongoDBArticleService };
