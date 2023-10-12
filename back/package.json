@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "lodash": "^4.17.21",
     "serve-index": "^1.9.1"
   },
   "devDependencies": {

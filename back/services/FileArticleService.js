@@ -2,6 +2,7 @@ const { isMatchingName } = require("../misc");
 const { randomUUID } = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const _ = require("lodash");
 
 const FILENAME = "./data/articles.json";
 
@@ -19,6 +20,8 @@ class FileArticleService {
       console.warn("articles.json recreated");
     }
   }
+
+  debounceSave = _.debounce(this.save.bind(this), 2000);
 
   save() {
     fs.writeFileSync(FILENAME, JSON.stringify(this.articles, undefined, 2));
@@ -42,7 +45,7 @@ class FileArticleService {
     const article = { ...newArticle, id: randomUUID() };
     console.log("article: ", article);
     this.articles.push(article);
-    this.save();
+    this.debounceSave();
     return article.id;
   }
 
@@ -53,12 +56,12 @@ class FileArticleService {
     }
     // article trouve
     this.articles.splice(index, 1);
-    this.save();
+    this.debounceSave();
   }
 
   deleteMany(ids) {
     this.articles = this.articles.filter((a) => !ids.includes(a.id));
-    this.save();
+    this.debounceSave();
   }
 }
 
