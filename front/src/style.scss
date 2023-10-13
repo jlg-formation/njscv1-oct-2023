@@ -11,6 +11,11 @@ body {
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+  padding: 0.5em 1em;
+}
+
 form {
   border: 0.1em solid black;
   padding: 0.5em;
@@ -30,9 +35,7 @@ form {
   }
 
   button {
-    cursor: pointer;
     margin-top: 3em;
-    padding: 0.5em 1em;
   }
 }
 
@@ -44,6 +47,12 @@ div.content {
   display: flex;
   flex-flow: column;
   gap: 1em;
+
+  nav {
+    height: 2em;
+    display: flex;
+    align-items: center;
+  }
 
   table {
     border: 0.1em solid #aaa;

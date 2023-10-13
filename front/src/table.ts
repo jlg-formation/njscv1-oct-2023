@@ -31,6 +31,9 @@ export const printArticles = () => {
     });
     tbody.appendChild(trElt);
   }
+
+  // gestion du bouton supprimer
+  querySelector("button.remove").hidden = selectedArticleIds.size === 0;
 };
 
 export const refreshArticles = async () => {

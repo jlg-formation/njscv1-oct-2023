@@ -1,7 +1,7 @@
-export const querySelector = (selector: string): Element => {
+export const querySelector = (selector: string): HTMLElement => {
   const result = document.querySelector(selector);
   if (result === null) {
     throw new Error(`Cannot find selector ${selector}`);
   }
-  return result;
+  return result as HTMLElement;
 };
