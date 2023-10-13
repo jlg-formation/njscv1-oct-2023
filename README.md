@@ -36,6 +36,8 @@ cd back
 npm run prod
 ```
 
+Open your browser on `http://localhost:3000`
+
 ## Configuration
 
 The Gestion Stock app can be configured only with environment variable:
