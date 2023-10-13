@@ -1,6 +1,6 @@
 import assert from "assert";
 import axios from "axios";
-import { a1 } from "./data/articles.js";
+import { a1 } from "./data/articles";
 
 const url = "http://localhost:3000/api/articles";
 

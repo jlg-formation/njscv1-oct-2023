@@ -1,0 +1,4 @@
+{
+  "$schema": "https://json.schemastore.org/mocharc.json",
+  "node-option": ["experimental-specifier-resolution=node", "no-warnings"]
+}
