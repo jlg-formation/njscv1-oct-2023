@@ -64,6 +64,11 @@ div.content {
     td,
     th {
       padding: 0.5em 1em;
+      width: 30%;
+
+      &.name {
+        width: 40%;
+      }
     }
 
     tbody {
