@@ -26,4 +26,13 @@ cd back
 npm run prod
 ```
 
+## Configuration
+
+The Gestion Stock app can be configured only with environment variable:
+
+- GESTION_STOCK_PORT
+- GESTION_STOCK_APITYPE
+- GESTION_STOCK_MONGODB
+- GESTION_STOCK_MONGODB_DB
+
 ## End of Documentation
