@@ -2,9 +2,10 @@ import { MongoClient, ObjectId } from "mongodb";
 import { handleId } from "../misc";
 
 // Replace the uri string with your connection string.
-const uri = "mongodb://127.0.0.1:27017";
+const uri = process.env.GESTION_STOCK_MONGODB || "mongodb://127.0.0.1:27017";
+const databaseName = process.env.GESTION_STOCK_MONGODB_DB || "gestion-stock";
 const client = new MongoClient(uri);
-const database = client.db("gestion-stock");
+const database = client.db(databaseName);
 const articles = database.collection("articles");
 
 export class MongoDBArticleService {

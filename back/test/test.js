@@ -2,7 +2,8 @@ import assert from "assert";
 import axios from "axios";
 import { a1 } from "./data/articles";
 
-const url = "http://localhost:3000/api/articles";
+const port = +(process.env.GESTION_STOCK_PORT || 3000);
+const url = `http://localhost:${port}/api/articles`;
 
 describe("Articles", () => {
   it("should get all articles", async () => {
