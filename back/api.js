@@ -24,7 +24,7 @@ const api = (type) => {
   app.get("/articles", (req, res) => {
     (async () => {
       try {
-        const query = req.query;
+        const { query } = req;
         const filteredArticles = await articleService.retrieveAll(query);
         res.json(filteredArticles);
       } catch (err) {
@@ -42,7 +42,7 @@ const api = (type) => {
 
     (async () => {
       try {
-        const id = req.params.id;
+        const { id } = req.params;
         const article = await articleService.retrieveOne(id);
         if (article === undefined) {
           res.status(404).end("404 not found");
@@ -84,7 +84,7 @@ const api = (type) => {
         // trouve -> on supprime l'article du tableau avec son id
         // et on renvoie une reponse 204 no content sans body
 
-        const id = req.params.id;
+        const { id } = req.params;
 
         const article = articleService.retrieveOne(id);
         if (article === undefined) {

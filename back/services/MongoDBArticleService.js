@@ -1,8 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { handleId } from "../misc";
 
-process.env.TRUC;
-
 // Replace the uri string with your connection string.
 const uri = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(uri);
@@ -10,8 +8,6 @@ const database = client.db("gestion-stock");
 const articles = database.collection("articles");
 
 export class MongoDBArticleService {
-  constructor() {}
-
   /**
    * Retrieve all articles from MongoDB.
    * Warning: this method does not implement filter
@@ -23,10 +19,10 @@ export class MongoDBArticleService {
   async retrieveAll() {
     try {
       const documents = await articles.find().toArray();
-
       return documents.map((doc) => handleId(doc));
     } catch (err) {
       console.log("err: ", err);
+      throw err;
     }
   }
 

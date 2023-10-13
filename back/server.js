@@ -1,9 +1,10 @@
-console.log("About to start a server...");
 import express from "express";
-import serveIndex from "serve-index";
 import morgan from "morgan";
+import serveIndex from "serve-index";
 
 import api from "./api";
+
+console.log("About to start a server...");
 
 const app = express();
 const port = 3000;

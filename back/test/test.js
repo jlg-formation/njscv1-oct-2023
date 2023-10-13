@@ -4,7 +4,7 @@ import { a1 } from "./data/articles";
 
 const url = "http://localhost:3000/api/articles";
 
-describe("Articles", function () {
+describe("Articles", () => {
   it("should get all articles", async () => {
     let response = await axios.get(url);
 
@@ -31,7 +31,7 @@ describe("Articles", function () {
 
   it("get one article", async () => {
     let response = await axios.get(url);
-    const id = response.data[0].id;
+    const { id } = response.data[0];
     response = await axios.get(`${url}/${id}`);
 
     assert.deepStrictEqual(response.status, 200);
@@ -42,7 +42,7 @@ describe("Articles", function () {
 
   it("delete one article", async () => {
     let response = await axios.get(url);
-    const id = response.data[0].id;
+    const { id } = response.data[0];
     const articleNbr = response.data.length;
     response = await axios.delete(`${url}/${id}`);
     assert.deepStrictEqual(response.status, 204);
@@ -65,12 +65,12 @@ describe("Articles", function () {
   });
 
   it("should return 404 (bad id)", async () => {
-    let response = await axios.get(`${url}/qqq`, { validateStatus: false });
+    const response = await axios.get(`${url}/qqq`, { validateStatus: false });
     assert.deepStrictEqual(response.status, 404);
   });
 
   it("should return 404 (well formatted id)", async () => {
-    let response = await axios.get(`${url}/000000000000000000000001`, {
+    const response = await axios.get(`${url}/000000000000000000000001`, {
       validateStatus: false,
     });
     assert.deepStrictEqual(response.status, 404);

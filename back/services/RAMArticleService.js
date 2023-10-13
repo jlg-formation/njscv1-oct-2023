@@ -1,10 +1,8 @@
-import { isMatchingName } from "../misc";
 import { randomUUID } from "node:crypto";
+import { isMatchingName } from "../misc";
 
 export class RAMArticleService {
   articles = [];
-
-  constructor() {}
 
   async retrieveAll(query) {
     const filteredArticles = this.articles.filter((a) => {

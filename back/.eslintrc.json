@@ -4,11 +4,20 @@
     "node": true,
     "es2023": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "airbnb-base", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    "prefer-const": "error",
+    "eqeqeq": ["error", "always"],
+    "quotes": "off",
+    "import/prefer-default-export": "off",
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "comma-dangle": "off",
+    "no-underscore-dangle": "off"
+  }
 }
