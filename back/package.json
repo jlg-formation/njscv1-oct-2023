@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha --config=.mocharc.json",
+    "lint": "eslint .",
     "start": "nodemon --no-warnings --experimental-specifier-resolution=node server.js"
   },
   "keywords": [],
