@@ -8,7 +8,7 @@ console.log("About to start a server...");
 
 const app = express();
 const port = 3000;
-const publicDir = ".";
+const publicDir = "../front/dist";
 
 app.use(morgan("dev"));
 
