@@ -1,14 +1,11 @@
 import { url } from "./constant";
+import { Article } from "./interfaces/Article";
 import { querySelector } from "./misc";
 
 const selectedArticleIds = new Set<string>();
+let articles: Article[] = [];
 
-export const refreshArticles = async () => {
-  // ramener la liste d'articles du back
-  const response = await fetch(url);
-  const articles = await response.json();
-  console.log("articles: ", articles);
-
+export const printArticles = () => {
   // trouver l'endroit de la page web ou afficher les articles
   const tbody = querySelector("body table tbody");
   console.log("tbody: ", tbody);
@@ -25,15 +22,23 @@ export const refreshArticles = async () => {
 <td class="price">${a.price} €</td>
 <td class="qty">${a.qty}</td>   
     `;
-    trElt.addEventListener("click", async () => {
+    trElt.addEventListener("click", () => {
       console.log("click click");
       selectedArticleIds.has(a.id)
         ? selectedArticleIds.delete(a.id)
         : selectedArticleIds.add(a.id);
-      await refreshArticles();
+      printArticles();
     });
     tbody.appendChild(trElt);
   }
+};
+
+export const refreshArticles = async () => {
+  // ramener la liste d'articles du back
+  const response = await fetch(url);
+  articles = await response.json();
+  console.log("articles: ", articles);
+  printArticles();
 };
 
 export const setSuppressAction = async () => {
@@ -42,7 +47,9 @@ export const setSuppressAction = async () => {
   console.log("button: ", button);
   button.addEventListener("click", async () => {
     console.log("suppress");
-
+    if (selectedArticleIds.size === 0) {
+      return;
+    }
     const ids = [...selectedArticleIds];
 
     await fetch(url, {
