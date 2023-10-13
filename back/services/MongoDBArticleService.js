@@ -1,6 +1,8 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { handleId } from "../misc";
 
+process.env.TRUC;
+
 // Replace the uri string with your connection string.
 const uri = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(uri);
@@ -18,12 +20,14 @@ export class MongoDBArticleService {
    * @return a list of articles
    * @memberof MongoDBArticleService
    */
-  async retrieveAll(query) {
+  async retrieveAll() {
     try {
       const documents = await articles.find().toArray();
 
       return documents.map((doc) => handleId(doc));
-    } catch (err) {}
+    } catch (err) {
+      console.log("err: ", err);
+    }
   }
 
   async retrieveOne(id) {
