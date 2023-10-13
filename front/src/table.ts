@@ -1,4 +1,5 @@
-const url = "http://localhost:3000/api/articles";
+import { url } from "./constant";
+import { querySelector } from "./misc";
 
 export const refreshArticles = async () => {
   // ramener la liste d'articles du back
@@ -7,10 +8,7 @@ export const refreshArticles = async () => {
   console.log("articles: ", articles);
 
   // trouver l'endroit de la page web ou afficher les articles
-  const tbody = document.querySelector("body table tbody");
-  if (tbody === null) {
-    throw new Error("oups");
-  }
+  const tbody = querySelector("body table tbody");
   console.log("tbody: ", tbody);
 
   // les afficher
