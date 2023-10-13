@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -7,7 +7,57 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <form>
+      <label>
+        <span>Nom</span>
+        <input type="text" />
+      </label>
+      <label>
+        <span>Prix</span>
+        <input type="text" />
+      </label>
+      <label>
+        <span>Quantité</span>
+        <input type="text" />
+      </label>
+      <button>Ajouter</button>
+    </form>
+    <div class="content">
+      <nav>
+        <button>Supprimer</button>
+      </nav>
+      <table>
+        <thead>
+          <tr>
+            <th class="name">Nom</th>
+            <th class="price">Prix</th>
+            <th class="qty">Quantité</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Tournevis</td>
+            <td class="price">2.99 €</td>
+            <td class="qty">123</td>
+          </tr>
+          <tr>
+            <td class="name">Tournevis</td>
+            <td class="price">2.99 €</td>
+            <td class="qty">123</td>
+          </tr>
+          <tr>
+            <td class="name">Tournevis</td>
+            <td class="price">2.99 €</td>
+            <td class="qty">123</td>
+          </tr>
+          <tr>
+            <td class="name">Tournevis</td>
+            <td class="price">2.99 €</td>
+            <td class="qty">123</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

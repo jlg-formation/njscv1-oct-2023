@@ -1,0 +1,69 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 2em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form {
+  border: 0.1em solid black;
+  padding: 0.5em;
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+  width: 100%;
+  max-width: 20em;
+
+  label {
+    display: flex;
+    flex-flow: column;
+  }
+
+  button {
+    margin-top: 3em;
+  }
+}
+
+div.content {
+  border: 0.1em solid black;
+  padding: 0.5em;
+  width: 100%;
+  max-width: 20em;
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+
+  table {
+    border: 0.1em solid #aaa;
+    border-spacing: 0;
+    thead {
+      background-color: #aaa;
+    }
+
+    td,
+    th {
+      padding: 0.5em 1em;
+    }
+
+    tbody {
+      cursor: pointer;
+      tr:nth-child(even) {
+        background: #eee;
+      }
+
+      tr:hover {
+        background: #ddd;
+      }
+
+      tr.selected {
+        background: #ccc;
+      }
+    }
+  }
+}
