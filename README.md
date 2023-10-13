@@ -2,6 +2,16 @@
 
 Application servant à gérer des articles.
 
+## Prerequistes
+
+OS : Windows/MacOS/Linux
+
+The following software must be installed on your machine:
+
+- nodejs 18.18.0
+- git
+- mongodb (if mongodb service is used)
+
 ## Install
 
 ```
