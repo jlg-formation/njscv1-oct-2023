@@ -10,6 +10,14 @@ const articles = database.collection("articles");
 export class MongoDBArticleService {
   constructor() {}
 
+  /**
+   * Retrieve all articles from MongoDB.
+   * Warning: this method does not implement filter
+   *
+   * @param {*} query
+   * @return a list of articles
+   * @memberof MongoDBArticleService
+   */
   async retrieveAll(query) {
     try {
       const documents = await articles.find().toArray();
