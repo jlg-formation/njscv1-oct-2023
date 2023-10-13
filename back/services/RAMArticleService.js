@@ -1,4 +1,4 @@
-import { isMatchingName } from "../misc.js";
+import { isMatchingName } from "../misc";
 import { randomUUID } from "node:crypto";
 
 export class RAMArticleService {

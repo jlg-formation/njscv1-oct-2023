@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon server.js"
+    "start": "nodemon --no-warnings --experimental-specifier-resolution=node server.js"
   },
   "keywords": [],
   "author": "",

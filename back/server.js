@@ -3,7 +3,7 @@ import express from "express";
 import serveIndex from "serve-index";
 import morgan from "morgan";
 
-import api from "./api.js";
+import api from "./api";
 
 const app = express();
 const port = 3000;

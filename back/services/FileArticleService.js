@@ -1,8 +1,8 @@
-import { isMatchingName } from "../misc.js";
-import { randomUUID } from "node:crypto";
-import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
 import _ from "lodash";
+import { randomUUID } from "node:crypto";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+import { isMatchingName } from "../misc";
 
 const FILENAME = "./data/articles.json";
 
