@@ -23,6 +23,11 @@ const api = (type) => {
 
   app.use((req, res, next) => {
     const origin = req.get("origin");
+    console.log("origin: ", origin);
+    if (!origin) {
+      next();
+      return;
+    }
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader("Access-Control-Allow-Methods", "*");
