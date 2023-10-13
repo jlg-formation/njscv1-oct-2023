@@ -49,20 +49,24 @@ export const setSuppressAction = async () => {
   const button = querySelector("button.remove");
   console.log("button: ", button);
   button.addEventListener("click", async () => {
-    console.log("suppress");
-    if (selectedArticleIds.size === 0) {
-      return;
+    try {
+      console.log("suppress");
+      if (selectedArticleIds.size === 0) {
+        return;
+      }
+      const ids = [...selectedArticleIds];
+
+      await fetch(url, {
+        method: "DELETE",
+        body: JSON.stringify(ids),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      await refreshArticles();
+    } catch (err) {
+      console.log("err: ", err);
     }
-    const ids = [...selectedArticleIds];
-
-    await fetch(url, {
-      method: "DELETE",
-      body: JSON.stringify(ids),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    await refreshArticles();
   });
 };
