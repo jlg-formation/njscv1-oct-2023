@@ -25,6 +25,7 @@ const api = (type) => {
     const origin = req.get("origin");
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader("Access-Control-Allow-Methods", "*");
     next();
   });
 
