@@ -21,6 +21,11 @@ const api = (type) => {
       throw new Error(`Cannot start api middleware. Bad type: ${type}`);
   }
 
+  app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+  });
+
   app.get("/articles", (req, res) => {
     (async () => {
       try {
